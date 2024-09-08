@@ -1,0 +1,4 @@
+docker build -t phpunit-php83 .
+docker run -it --rm -v $(pwd):/app phpunit-php83 ./vendor/bin/phpunit
+
+docker run -it --rm -v $(pwd):/app phpunit-php83 ./vendor/bin/phpunit tests/AMLMonitorTest.php
