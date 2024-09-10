@@ -26,4 +26,4 @@ jobs:
 
       - name: Run PHPUnit Tests
         run: |
-          docker run  --rm -v $(pwd):/app phpunit-php83 ./vendor/bin/phpunit tests/Domain/Entity/AMLMonitorTest.php
+          docker run  --rm -v $(pwd):/app phpunit-php83 ./vendor/bin/phpunit tests/Domain/Entity/AMLMonitorTest.php tests/AMLTest.php
