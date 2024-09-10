@@ -16,14 +16,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Build Docker image
-        run: |
-          docker build --cache-from=type=local,src=/tmp/.buildx-cache -t phpunit-php83 .
-
       - name: Run Composer Install
         run: |
-          docker run  --rm -v $(pwd):/app -v ~/.composer/cache:/tmp/composer/cache  phpunit-php83 composer install
+          docker run  --rm -v $(pwd):/app -v ~/.composer/cache:/tmp/composer/cache  piotrmroczek81/phpunit-php83:latest composer install
 
       - name: Run PHPUnit Tests
         run: |
-          docker run  --rm -v $(pwd):/app phpunit-php83 ./vendor/bin/phpunit tests/Domain/Entity/AMLMonitorTest.php tests/AMLTest.php
+          docker run  --rm -v $(pwd):/app piotrmroczek81/phpunit-php83:latest ./vendor/bin/phpunit tests/Domain/Entity/AMLMonitorTest.php tests/AMLTest.php
