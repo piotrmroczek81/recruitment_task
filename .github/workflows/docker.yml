@@ -25,13 +25,22 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+
       - name: Build Docker image
         run: |
           docker build --cache-from=type=local,src=/tmp/.buildx-cache -t phpunit-php83 .
 
       - name: Run Composer Install
         run: |
-          docker run  --rm -v $(pwd):/app phpunit-php83 composer install
+          docker run  --rm -v $(pwd):/app -v ~/.composer/cache:/tmp/composer/cache  phpunit-php83 composer install
 
       - name: Run PHPUnit Tests
         run: |
