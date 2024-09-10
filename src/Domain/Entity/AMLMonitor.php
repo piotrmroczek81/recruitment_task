@@ -31,6 +31,19 @@ class AMLMonitor
         $this->checks[] = $check;
     }
 
+    public function runChecksAgainstOwners(array $owners) {
+        foreach ($owners as $owner) {
+            foreach ($this->checks as $check) {
+                if ($check->performCheck($owner)) {
+                    $owner->accumulateAMLHit();
+                }
+            }
+        }
+    }
+
+
+
+
     public function getChecks(): array
     {
         return $this->checks;

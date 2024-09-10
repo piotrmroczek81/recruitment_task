@@ -21,5 +21,9 @@ class AMLCheck
         $this->executionDate = $executionDate;
     }
 
-    // Getters...
+    public function performCheck(Owner $owner) {
+        // Implement your check logic here
+        // For demonstration, let's assume it always returns true
+        return true;
+    }
 }
