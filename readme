@@ -1,4 +1,10 @@
-docker build -t phpunit-php83 .
-docker run -it --rm -v $(pwd):/app phpunit-php83 ./vendor/bin/phpunit
 
-docker run -it --rm -v $(pwd):/app phpunit-php83 ./vendor/bin/phpunit tests/AMLMonitorTest.php
+docker run -it --rm -v $(pwd):/app piotrmroczek81/phpunit-php83:latest composer install
+docker run -it --rm -v $(pwd):/app piotrmroczek81/phpunit-php83:latest ./vendor/bin/phpunit tests/
+
+
+# Build and Push Docker Image
+docker build -t phpunit-php83 .
+
+docker tag phpunit-php83:latest piotrmroczek81/phpunit-php83:latest
+docker push piotrmroczek81/phpunit-php83:latest
