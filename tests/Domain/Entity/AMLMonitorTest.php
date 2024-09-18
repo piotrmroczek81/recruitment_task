@@ -27,4 +27,22 @@ class AMLMonitorTest extends TestCase {
         $this->assertCount(2, $amlMonitor->getAMLChecks()); 
     }
 
+    public function testAMLMonitorUseAMLChecks(): void
+    {
+        $amlMonitor = new AMLMonitor(new UUID('550e8400-e29b-41d4-a716-446655440001'));               
+        
+        $checkMock = $this->createMock(AMLCheck::class);
+        $checkMock->expects($this->once())->method('run');
+        $amlMonitor->addAMLCheck(
+            $checkMock
+        );
+
+        $checkMock = $this->createMock(AMLCheck::class);
+        $checkMock->expects($this->once())->method('run');
+        $amlMonitor->addAMLCheck(
+            $checkMock
+        );
+
+        $amlMonitor->runMonitor();
+    }
 }
