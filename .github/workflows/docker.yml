@@ -17,6 +17,11 @@ jobs:
       # - name: Set up Docker Buildx
       #   uses: docker/setup-buildx-action@v1
 
+      - name: Run ls
+        run: |
+          docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest ls
+
+
       - name: Run Composer Install
         run: |
           docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest composer install
