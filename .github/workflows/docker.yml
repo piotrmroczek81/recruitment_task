@@ -19,6 +19,11 @@ jobs:
 
       - name: Run ls
         run: |
+          docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest pwd
+
+
+      - name: Run ls
+        run: |
           docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest ls
 
 
