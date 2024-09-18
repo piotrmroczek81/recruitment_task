@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # lub inna gałąź, na której chcesz uruchamiać workflow
+      - wip
 
 jobs:
   build:
