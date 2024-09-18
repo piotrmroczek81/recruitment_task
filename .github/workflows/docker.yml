@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # lub inna gałąź, na której chcesz uruchamiać workflow
+      - wip
 
 jobs:
   build:
@@ -13,13 +14,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v1
+
+      - name: Run pwd
+        run: |
+          docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest pwd
+
+
+      - name: Run ls
+        run: |
+          docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest ls
+
 
       - name: Run Composer Install
         run: |
-          docker run  --rm -v $(pwd):/app -v ~/.composer/cache:/tmp/composer/cache  piotrmroczek81/phpunit-php83:latest composer install
+          docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest composer install
 
       - name: Run PHPUnit Tests
         run: |
-          docker run  --rm -v $(pwd):/app piotrmroczek81/phpunit-php83:latest ./vendor/bin/phpunit tests/Domain/Entity/AMLMonitorTest.php tests/AMLTest.php
+          docker run  --rm -v $(pwd):/app piotrmroczek81/phpunit-php83:latest ./vendor/bin/phpunit tests/
