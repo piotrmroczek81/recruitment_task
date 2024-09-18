@@ -10,7 +10,10 @@ class Owner
 {
     private UUID $id;
     
+
     private array $companies = [];
+
+    private array $amlHits = [];
 
     public function __construct(UUID $id)    {
         $this->id = $id;
@@ -23,5 +26,15 @@ class Owner
     public function addCompany(Company $company): void
     {
         $this->companies[] = $company;
+    }
+
+    public function addAMLHit(AMLHit $amlHit): void
+    {
+        $this->amlHits[] = $amlHit;
+    }
+
+    public function getHits(): array
+    {
+        return $this->amlHits;
     }
 }
