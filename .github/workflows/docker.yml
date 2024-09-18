@@ -19,7 +19,7 @@ jobs:
 
       - name: Run Composer Install
         run: |
-          docker run  --rm -v $(pwd):/app -v ~/.composer/cache:/tmp/composer/cache  piotrmroczek81/phpunit-php83:latest composer install
+          docker run  --rm -v $(pwd):/app    piotrmroczek81/phpunit-php83:latest composer install
 
       - name: Run PHPUnit Tests
         run: |
