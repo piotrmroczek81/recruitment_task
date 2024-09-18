@@ -23,4 +23,8 @@ class AMLMonitor
         return $this->amlChecks;
     }
 
+    public function addAMLCheck(AMLCheck $amlCheck): void
+    {
+        $this->amlChecks[] = $amlCheck;
+    }
 }
