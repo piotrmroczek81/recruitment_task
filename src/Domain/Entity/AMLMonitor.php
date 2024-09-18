@@ -10,7 +10,6 @@ class AMLMonitor
 {
     private UUID $id;
 
-
     private array $amlChecks = [];
 
     public function __construct(UUID $id)    {
@@ -26,5 +25,14 @@ class AMLMonitor
     public function addAMLCheck(AMLCheck $amlCheck): void
     {
         $this->amlChecks[] = $amlCheck;
+    }
+
+
+    public function runMonitor(): void {
+
+        foreach($this->amlChecks as $amlCheck) {
+            $amlCheck->run();
+        }
+
     }
 }

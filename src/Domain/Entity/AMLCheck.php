@@ -14,4 +14,7 @@ class AMLCheck
         $this->id = $id;
     }        
 
+    public function run(): void {
+
+    }
 }
