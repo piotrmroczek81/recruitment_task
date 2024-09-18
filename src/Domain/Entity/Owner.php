@@ -10,6 +10,11 @@ class Owner
 {
     private UUID $id;
     
+
+    public function __construct(UUID $id)    {
+        $this->id = $id;
+    }    
+
     private array $companies = [];
 
     public function __construct(UUID $id)    {
