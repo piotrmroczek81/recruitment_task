@@ -16,6 +16,10 @@ class Company
         $this->id = $id;
     }    
 
+    public function getId(): UUID {
+        return $this->id;
+    }
+
     public function addOwner(Owner $owner): void
     {
         $this->owners[] = $owner;
