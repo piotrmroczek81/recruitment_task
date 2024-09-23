@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-// Domain Layer
-
 namespace Domain\Entity;
 
 use Domain\ValueObject\UUID;
@@ -11,19 +9,21 @@ use Domain\ValueObject\UUID;
 class AMLCheck
 {
     private UUID $id;
-    private string $name;
-    private \DateTimeImmutable $executionDate;
+    private Company $company;
 
-    public function __construct(UUID $id, string $name, \DateTimeImmutable $executionDate)
-    {
+    public function __construct(UUID $id, Company $company)   {
         $this->id = $id;
-        $this->name = $name;
-        $this->executionDate = $executionDate;
+        $this->company = $company;
+    }
+    
+    public function getCompany(): Company {
+        return $this->company;
     }
 
-    public function performCheck(Owner $owner) {
-        // Implement your check logic here
-        // For demonstration, let's assume it always returns true
-        return true;
+
+    
+
+    public function run(): bool {
+
     }
 }

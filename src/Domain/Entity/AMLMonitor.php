@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Domain\Entity;
 
 use Domain\ValueObject\UUID;
@@ -7,45 +9,30 @@ use Domain\ValueObject\UUID;
 class AMLMonitor
 {
     private UUID $id;
-    private string $name;
-    private array $checks = [];
 
-    public function __construct(UUID $id, string $name)
-    {
+    private array $amlChecks = [];
+
+    public function __construct(UUID $id)    {
         $this->id = $id;
-        $this->name = $name;
-    }
+    }        
 
-    public function getId(): UUID
+    
+    public function getAMLChecks(): array
     {
-        return $this->id;
+        return $this->amlChecks;
     }
 
-    public function getName(): string
+    public function addAMLCheck(AMLCheck $amlCheck): void
     {
-        return $this->name;
+        $this->amlChecks[] = $amlCheck;
     }
 
-    public function addCheck(AMLCheck $check): void
-    {
-        $this->checks[] = $check;
-    }
 
-    public function runChecksAgainstOwners(array $owners) {
-        foreach ($owners as $owner) {
-            foreach ($this->checks as $check) {
-                if ($check->performCheck($owner)) {
-                    $owner->accumulateAMLHit();
-                }
-            }
+    public function runMonitor(): void {
+
+        foreach($this->amlChecks as $amlCheck) {
+            $amlCheck->run();
         }
-    }
 
-
-
-
-    public function getChecks(): array
-    {
-        return $this->checks;
     }
 }
