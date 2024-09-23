@@ -23,7 +23,7 @@ class AMLCheck
 
     
 
-    public function run(): void {
+    public function run(): bool {
 
     }
 }

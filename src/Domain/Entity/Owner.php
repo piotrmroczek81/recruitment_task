@@ -28,13 +28,19 @@ class Owner
         $this->companies[] = $company;
     }
 
+
     public function addAMLHit(AMLHit $amlHit): void
     {
         $this->amlHits[] = $amlHit;
     }
 
-    public function getHits(): array
+    public function getAMLHits(): array
     {
         return $this->amlHits;
+    }
+
+    public function resetAMLHits(): array
+    {
+        return $this->amlHits = [];
     }
 }
